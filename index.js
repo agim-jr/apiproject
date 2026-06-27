@@ -1,4 +1,5 @@
 const API_KEY = 'c31b6b59';
+let moviesData = [];
 
 async function searchMovies() {
     const searchInput = document.getElementById('movie-search').value;
@@ -9,6 +10,8 @@ async function searchMovies() {
     }
 
     const movieListEl = document.querySelector(".movie-list");
+        const filterSection = document.getElementById("filter-section"); // FIXED THIS LINE
+
     movieListEl.innerHTML = '<p>Loading...</p>';
 
     const response = await fetch(`http://www.omdbapi.com/?s=${searchInput}&apikey=${API_KEY}`);
@@ -17,11 +20,43 @@ async function searchMovies() {
     console.log(data);
 
     if (data.Response === "True") {
-        movieListEl.innerHTML = data.Search.map((movie) => movieHTML(movie)).join("");
+        moviesData = data.Search;
+        filterSection.style.display = 'flex';
+        document.getElementById('sort-filter').value = 'default';
+        displayMovies(moviesData);
     } else {
+        moviesData = [];
+        filterSection.style.display = 'none';
         movieListEl.innerHTML = `<p class="error-message">${data.Error}</p>`;
     }
 }
+
+function displayMovies(movies) {
+    const movieListEl = document.querySelector(".movie-list");
+    movieListEl.innerHTML = movies.map((movie) => movieHTML(movie)).join("");
+}
+function applySorting() {
+    const sortValue = document.getElementById('sort-filter').value;
+    let sortedMovies = [...moviesData];
+
+    switch(sortValue) {
+        case 'a-z':
+            sortedMovies.sort((a, b) => a.Title.localeCompare(b.Title));
+            break;
+        case 'z-a':
+            sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title));
+            break;
+        case 'newest':
+            sortedMovies.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
+            break;
+        case 'oldest':
+            sortedMovies.sort((a, b) => parseInt(a.Year) - parseInt(b.Year));
+            break;
+    }
+
+    displayMovies(sortedMovies);
+}
+
 
 function showMovieDetails(imdbID) {
     localStorage.setItem("imdbID", imdbID);

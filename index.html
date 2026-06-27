@@ -14,6 +14,16 @@
       <input type="text" id="movie-search" placeholder="Search for a movie..." />
       <button onclick="searchMovies()">Search</button>
     </div>
+    <div class="filter-section" id="filter-section" style="display: none;">
+      <label for="sort-filter">Sort by:</label>
+      <select id="sort-filter" onchange="applySorting()">
+        <option value="default">Default</option>
+        <option value="a-z">Alphabetical A to Z</option>
+        <option value="z-a">Alphabetical Z to A</option>
+        <option value="newest">Newest to Oldest</option>
+        <option value="oldest">Oldest to Newest</option>
+      </select>
+    </div>
     <div class="row">
       <div class="movie-list">
         <p>Search for a movie to get started!</p>
