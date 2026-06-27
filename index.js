@@ -31,4 +31,16 @@ function showMovieDetails(imdbID) {
     window.location.href = `${window.location.origin}/movie.html`;
 }
 
+function movieHTML(movie) {
+    const poster = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x450?text=No+Poster";
 
+    return `<div class="movie-card" onclick="showMovieDetails('${movie.imdbID}')">
+        <div class="movie-card__container">
+            <img src="${poster}" alt="${movie.Title}" class="movie-poster">
+            <h3>${movie.Title}</h3>
+            <p><b>Year:</b> ${movie.Year}</p>
+            <p><b>Type:</b> ${movie.Type}</p>
+            <p><b>IMDb ID:</b> ${movie.imdbID}</p>
+        </div>
+    </div>`;
+}
