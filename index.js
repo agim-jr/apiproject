@@ -8,11 +8,9 @@ async function searchMovies() {
         return;
     }
 
-
     const movieListEl = document.querySelector(".movie-list");
     movieListEl.innerHTML = '<p>Loading...</p>';
 
-    // Using the 's' parameter for search
     const response = await fetch(`http://www.omdbapi.com/?s=${searchInput}&apikey=${API_KEY}`);
     const data = await response.json();
 
@@ -25,7 +23,6 @@ async function searchMovies() {
     }
 }
 
-
 function showMovieDetails(imdbID) {
     localStorage.setItem("imdbID", imdbID);
     window.location.href = `${window.location.origin}/movie.html`;
@@ -36,11 +33,10 @@ function movieHTML(movie) {
 
     return `<div class="movie-card" onclick="showMovieDetails('${movie.imdbID}')">
         <div class="movie-card__container">
-            <img src="${poster}" alt="${movie.Title}" class="movie-poster">
+            <img src="${poster}" alt="" class="movie-poster" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22450%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22450%22/%3E%3Ctext fill=%22%23999%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-family=%22Arial%22 font-size=%2220%22%3ENo Poster%3C/text%3E%3C/svg%3E';">
             <h3>${movie.Title}</h3>
             <p><b>Year:</b> ${movie.Year}</p>
             <p><b>Type:</b> ${movie.Type}</p>
-            <p><b>IMDb ID:</b> ${movie.imdbID}</p>
         </div>
     </div>`;
 }
