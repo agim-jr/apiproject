@@ -1,4 +1,4 @@
-const API_KEY =
+const API_KEY = 'c31b6b59';
 
 async function searchMovies() {
     const searchInput = document.getElementById('movie-search').value;
