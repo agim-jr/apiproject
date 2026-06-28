@@ -60,7 +60,7 @@ function applySorting() {
 
 function showMovieDetails(imdbID) {
     localStorage.setItem("imdbID", imdbID);
-    window.location.href = `${window.location.origin}/movie.html`;
+    window.location.href = `${window.location.origin}/apiproject/movie.html`;
 }
 
 function movieHTML(movie) {
