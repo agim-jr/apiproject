@@ -10,7 +10,7 @@ async function renderMovieDetails() {
     }
 
     // Using the 'i' parameter to get movie by IMDb ID with full plot
-    const response = await fetch(`http://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=${API_KEY}`);
+    const response = await fetch(`https://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=${API_KEY}`);
     const movie = await response.json();
     console.log(movie);
 
